@@ -10,25 +10,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="70dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_author_tv"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/item_desc_tv"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/item_author_tv"/>
 
         <TextView
-            android:id="@+id/item_description_tv"
+            android:textSize="22sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/item_description_tv"/>
     </LinearLayout>
 </FrameLayout>

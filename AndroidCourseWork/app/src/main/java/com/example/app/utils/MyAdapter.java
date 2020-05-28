@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 .load(data.feedurl)
                 .into(myViewHolder.imageView);
         //TODO 2.2.展示补充信息
-        myViewHolder.nicknameTv.setText(String.format("作者：%s", data.nickname));
+        myViewHolder.nicknameTv.setText(String.format("@%s", data.nickname));
         myViewHolder.descTv.setText(data.description);
     }
 
