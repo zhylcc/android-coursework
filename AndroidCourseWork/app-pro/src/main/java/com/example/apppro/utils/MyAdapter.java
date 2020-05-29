@@ -56,12 +56,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         vHolder.author_tv.setText(String.format("@%s", data.nickname));
         vHolder.description_tv.setText(data.description);
         vHolder.surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            //当SurfaceHolder被创建的时候回调
             @Override
-            public void surfaceCreated(SurfaceHolder holder) {
+            public void surfaceCreated(SurfaceHolder holder){
                 mediaPlayer.setSurface(holder.getSurface());
                 // TODO Q2.解决切换后台黑屏问题
                 if (position == savedHolderPos) {
-                    mediaPlayer.start();
+                    try{
+                        mediaPlayer.prepare();
+                        mediaPlayer.start();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
             }
 

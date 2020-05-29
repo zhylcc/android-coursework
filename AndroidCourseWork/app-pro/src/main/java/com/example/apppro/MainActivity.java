@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
                 pageSelected(position);
             }
         });
-
-        imageView = findViewById(R.id.main_imageview);
+        imageView = findViewById(R.id.main_heart);
     }
 
     @Override
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
 
     public void pageSelected(int position) {
         //TODO 3.滑动切换视频
+        //mediaPlayer.stop();
         mediaPlayer.reset();
         try {
             mediaPlayer.setDataSource(mDataList.get(position).feedurl);
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
+                    //test
                     mediaPlayer.setLooping(true);
                     mediaPlayer.start();
                 }
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
         //TODO 5.Glide实现双击点赞动态画
         Glide.with(this)
                 .load(getResources().getDrawable(R.drawable.heart_fill))
-                .transition(withCrossFade(1000))
+                .transition(withCrossFade(750))
                 .into(imageView);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -127,4 +128,5 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
             }
         }, 1000);
     }
+
 }

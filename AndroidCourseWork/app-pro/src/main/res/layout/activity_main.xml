@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     tools:context=".MainActivity">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -12,8 +14,56 @@
         android:orientation="vertical" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_imageview"
+        android:layout_width="2000dp"
+        android:layout_height="200dp"
+        android:id="@+id/main_heart"
         android:layout_gravity="center"/>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="555dp"
+        android:layout_height="40dp">
+        <com.example.apppro.NavItemView
+            android:layout_width="0dp"
+            android:id="@+id/one"
+            app:navtext="首页"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+        </com.example.apppro.NavItemView>
+        <com.example.apppro.NavItemView
+            android:layout_width="0dp"
+            android:id="@+id/two"
+            app:navtext="关注"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+        </com.example.apppro.NavItemView>
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="45dp"
+            android:layout_height="29dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription=
+                "@string/android_launcher_image"
+            android:src="@drawable/ic_launcher" />
+        <com.example.apppro.NavItemView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/three"
+            app:navtext="消息"
+            android:layout_height="wrap_content">
+        </com.example.apppro.NavItemView>
+        <com.example.apppro.NavItemView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/four"
+            app:navtext="我"
+            android:layout_height="wrap_content">
+        </com.example.apppro.NavItemView>
+    </LinearLayout>
+
 </FrameLayout>
