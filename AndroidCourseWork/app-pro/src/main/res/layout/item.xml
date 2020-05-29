@@ -5,30 +5,49 @@
     android:layout_height="match_parent">
     <SurfaceView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="550dp"
         android:id="@+id/item_surfaceview"/>
 
     <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="310dp"
+        android:layout_gravity="right">
+
+        <com.like.LikeButton
+            app:icon_type="heart"
+            app:icon_size="17dp"
+            android:id="@+id/star_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="90dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_author_tv"
+            android:textSize="23sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/item_desc_tv"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/item_author_tv"/>
 
         <TextView
-            android:id="@+id/item_description_tv"
+            android:textSize="21sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/item_description_tv"/>
     </LinearLayout>
 </FrameLayout>

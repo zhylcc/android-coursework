@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.mediaPlayer = mediaPlayer;
     }
 
+
     public void setDataList(List<MyData> dataList) {
         this.dataList = dataList;
     }
@@ -55,12 +56,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         vHolder.author_tv.setText(String.format("@%s", data.nickname));
         vHolder.description_tv.setText(data.description);
         vHolder.surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            //当SurfaceHolder被创建的时候回调
             @Override
-            public void surfaceCreated(SurfaceHolder holder) {
+            public void surfaceCreated(SurfaceHolder holder){
                 mediaPlayer.setSurface(holder.getSurface());
                 // TODO Q2.解决切换后台黑屏问题
                 if (position == savedHolderPos) {
-                    mediaPlayer.start();
+                    try{
+                        mediaPlayer.prepare();
+                        mediaPlayer.start();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
             }
 
@@ -82,7 +90,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return dataList == null ? 0 : dataList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
+class ViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
 
         private SurfaceView surfaceView;
         private TextView author_tv;
@@ -104,9 +112,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 clickCount++;
                 new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (clickCount == 1) {
+                            @Override
+                            public void run() {
+                                if (clickCount == 1) {
                             itemListener.pageSingleClicked();
                         } else {
                             itemListener.pageDoubleClicked();
