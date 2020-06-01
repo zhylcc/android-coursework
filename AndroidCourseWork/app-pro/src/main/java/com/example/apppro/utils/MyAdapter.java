@@ -63,7 +63,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 // TODO Q2.解决切换后台黑屏问题
                 if (position == savedHolderPos) {
                     try{
-                        mediaPlayer.prepare();
                         mediaPlayer.start();
                     }catch(Exception e){
                         e.printStackTrace();
