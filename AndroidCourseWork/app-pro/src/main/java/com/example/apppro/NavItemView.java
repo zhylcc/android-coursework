@@ -15,9 +15,9 @@ import android.widget.TextView;
 public class NavItemView extends RelativeLayout {
     TextView textView_title;
     TextView textView_line;
-    ImageView imageView_Shuaxin;
+    ImageView imageView_Refresh;
     private View mView;
-    private boolean isShowReflashImage=false;
+    private boolean isShowRefreshImage =false;
     private NavItemReflashListener navItemReflashListener;
     public NavItemView(Context context) {
         this(context,null);
@@ -26,11 +26,11 @@ public class NavItemView extends RelativeLayout {
         this(context, attrs,0);
     }
 
-    public void setShowReflashImage(boolean showReflashImage) {
-        isShowReflashImage = showReflashImage;
+    public void setShowRefreshImage(boolean showRefreshImage) {
+        isShowRefreshImage = showRefreshImage;
     }
 
-    public void setNavItemReflashListener(NavItemReflashListener navItemReflashListener) {
+    public void setNavItemRefreshListener(NavItemReflashListener navItemReflashListener) {
         this.navItemReflashListener = navItemReflashListener;
     }
 
@@ -40,7 +40,7 @@ public class NavItemView extends RelativeLayout {
         mView = View.inflate(context, R.layout.view_navitem, this);
         textView_line=mView.findViewById(R.id.nav_item_tv_line);
         textView_title=mView.findViewById(R.id.nav_item_tv_title);
-        imageView_Shuaxin=mView.findViewById(R.id.reflash);
+        imageView_Refresh =mView.findViewById(R.id.reflash);
 //        获取自定义属性
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.NavItem);
         if(ta!=null){
@@ -53,10 +53,10 @@ public class NavItemView extends RelativeLayout {
     private void initListener() {
         final Animation rotateAnimation = new RotateAnimation(0,-360, Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF,0.5f);
         rotateAnimation.setDuration(300);
-        imageView_Shuaxin.setOnClickListener(new OnClickListener() {
+        imageView_Refresh.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView_Shuaxin.startAnimation(rotateAnimation);
+                imageView_Refresh.startAnimation(rotateAnimation);
                 if(navItemReflashListener!=null){
                     navItemReflashListener.onReflash(v);
                 }
@@ -64,9 +64,9 @@ public class NavItemView extends RelativeLayout {
         });
     }
     public void startActive(){
-        if(isShowReflashImage){
+        if(isShowRefreshImage){
             textView_title.setVisibility(GONE);
-            imageView_Shuaxin.setVisibility(VISIBLE);
+            imageView_Refresh.setVisibility(VISIBLE);
         }else {
             textView_title.setTextColor(Color.WHITE);
             textView_title.setTextSize(18);
@@ -74,9 +74,9 @@ public class NavItemView extends RelativeLayout {
         textView_line.animate().alpha(1).setDuration(200).start();
     }
     public void cancelActive(){
-        if(isShowReflashImage){
+        if(isShowRefreshImage){
             textView_title.setVisibility(VISIBLE);
-            imageView_Shuaxin.setVisibility(GONE);
+            imageView_Refresh.setVisibility(GONE);
             textView_line.setAlpha(0);
         }else {
             textView_title.setTextColor(Color.parseColor("#F1F1F1"));

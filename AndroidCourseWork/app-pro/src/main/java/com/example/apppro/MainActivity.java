@@ -6,7 +6,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.apppro.utils.MyAdapter;
@@ -24,17 +26,36 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class MainActivity extends AppCompatActivity implements MyAdapter.ItemListener {
+public class MainActivity extends AppCompatActivity implements MyAdapter.ItemListener, View.OnClickListener {
 
     private MyAdapter mAdapter;
     private List<MyData> mDataList;
     private MediaPlayer mediaPlayer;
     private ImageView imageView;
+    private int Position;
 
+    NavItemView FrontPageButton, FollowButton, MessageButton, MeButton, Selected_Item;//导航栏
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        FrontPageButton =findViewById(R.id.one);
+        FollowButton =findViewById(R.id.two);
+        MessageButton =findViewById(R.id.three);
+        MeButton =findViewById(R.id.four);
+        FrontPageButton.setShowRefreshImage(true);
+        FrontPageButton.setNavItemRefreshListener(new NavItemReflashListener() {
+            @Override
+            public void onReflash(View v) {
+                Toast.makeText(MainActivity.this, "刷新中..", Toast.LENGTH_SHORT).show();
+                pageSelected(Position);//刷新时重新传入当前页面
+            }
+        });
+        FrontPageButton.setOnClickListener(this);
+        FollowButton.setOnClickListener(this);
+        MessageButton.setOnClickListener(this);
+        MeButton.setOnClickListener(this);
 
         //TODO 1.使用Retrofit访问api，获取数据
         Retrofit retrofit = new Retrofit.Builder()
@@ -65,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+                Position = position;
                 pageSelected(position);
             }
         });
@@ -86,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
 
     public void pageSelected(int position) {
         //TODO 3.滑动切换视频
-        //mediaPlayer.stop();
         mediaPlayer.reset();
         try {
             mediaPlayer.setDataSource(mDataList.get(position).feedurl);
@@ -94,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
-                    //test
                     mediaPlayer.setLooping(true);
                     mediaPlayer.start();
                 }
@@ -129,4 +149,29 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
         }, 1000);
     }
 
+    //TODO6:导航栏控件监听
+    @Override
+    public void onClick(View v) {
+        if(Selected_Item !=null){
+            Selected_Item.cancelActive();
+        }
+        switch (v.getId()){
+            case R.id.one:
+                FrontPageButton.startActive();
+                Selected_Item = FrontPageButton;
+                break;
+            case R.id.two:
+                FollowButton.startActive();
+                Selected_Item = FollowButton;
+                break;
+            case R.id.three:
+                MessageButton.startActive();
+                Selected_Item = MessageButton;
+                break;
+            case R.id.four:
+                MeButton.startActive();
+                Selected_Item = MeButton;
+                break;
+        }
+    }
 }

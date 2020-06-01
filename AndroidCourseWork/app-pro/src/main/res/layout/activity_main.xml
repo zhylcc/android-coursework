@@ -47,8 +47,7 @@
             android:layout_height="29dp"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:contentDescription=
-                "@string/android_launcher_image"
+            android:contentDescription="@string/android_launcher_image"
             android:src="@drawable/ic_launcher" />
         <com.example.apppro.NavItemView
             android:layout_width="0dp"
