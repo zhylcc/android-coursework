@@ -1,4 +1,4 @@
-package com.example.apppro;
+package com.example.apppro.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,13 +12,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.apppro.R;
+
 public class NavItemView extends RelativeLayout {
     TextView textView_title;
     TextView textView_line;
     ImageView imageView_Refresh;
+    ImageView imageView_Message;
     private View mView;
     private boolean isShowRefreshImage =false;
-    private NavItemReflashListener navItemReflashListener;
+    private NavItemRefreshListener navItemReflashListener;
     public NavItemView(Context context) {
         this(context,null);
     }
@@ -30,7 +33,7 @@ public class NavItemView extends RelativeLayout {
         isShowRefreshImage = showRefreshImage;
     }
 
-    public void setNavItemRefreshListener(NavItemReflashListener navItemReflashListener) {
+    public void setNavItemRefreshListener(NavItemRefreshListener navItemReflashListener) {
         this.navItemReflashListener = navItemReflashListener;
     }
 
@@ -40,14 +43,14 @@ public class NavItemView extends RelativeLayout {
         mView = View.inflate(context, R.layout.view_navitem, this);
         textView_line=mView.findViewById(R.id.nav_item_tv_line);
         textView_title=mView.findViewById(R.id.nav_item_tv_title);
-        imageView_Refresh =mView.findViewById(R.id.reflash);
+        imageView_Refresh=mView.findViewById(R.id.reflash);
+
 //        获取自定义属性
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.NavItem);
         if(ta!=null){
             String navtext = ta.getString(R.styleable.NavItem_navtext);
             textView_title.setText(navtext);
         }
-
         initListener();
     }
     private void initListener() {
@@ -58,10 +61,11 @@ public class NavItemView extends RelativeLayout {
             public void onClick(View v) {
                 imageView_Refresh.startAnimation(rotateAnimation);
                 if(navItemReflashListener!=null){
-                    navItemReflashListener.onReflash(v);
+                    navItemReflashListener.onRefresh(v);
                 }
             }
         });
+
     }
     public void startActive(){
         if(isShowRefreshImage){
