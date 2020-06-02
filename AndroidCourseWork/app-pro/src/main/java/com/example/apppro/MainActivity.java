@@ -3,6 +3,7 @@ package com.example.apppro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.example.apppro.utils.MyAdapter;
 import com.example.apppro.utils.MyData;
 import com.example.apppro.utils.MyService;
+import com.example.apppro.utils.NavItemRefreshListener;
+import com.example.apppro.utils.NavItemView;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
         MessageButton =findViewById(R.id.three);
         MeButton =findViewById(R.id.four);
         FrontPageButton.setShowRefreshImage(true);
-        FrontPageButton.setNavItemRefreshListener(new NavItemReflashListener() {
+        FrontPageButton.setNavItemRefreshListener(new NavItemRefreshListener() {
             @Override
-            public void onReflash(View v) {
+            public void onRefresh(View v) {
                 Toast.makeText(MainActivity.this, "刷新中..", Toast.LENGTH_SHORT).show();
                 pageSelected(Position);//刷新时重新传入当前页面
             }
@@ -167,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ItemLis
             case R.id.three:
                 MessageButton.startActive();
                 Selected_Item = MessageButton;
+                startActivity(new Intent(this, MessageActivity.class));
                 break;
             case R.id.four:
                 MeButton.startActive();
