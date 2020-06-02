@@ -36,6 +36,6 @@ public class MessageActivity extends AppCompatActivity {
         friendsList.add(new Friends(data[0], R.drawable.jackma));
         friendsList.add(new Friends(data[1], R.drawable.ponyma));
         friendsList.add(new Friends(data[2], R.drawable.yiming));
-        friendsList.add(new Friends(data[2], R.drawable.robinli));
+        friendsList.add(new Friends(data[3], R.drawable.robinli));
     }
 }
